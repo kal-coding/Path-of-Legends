@@ -12,6 +12,9 @@ extends StaticBody2D
 var player_in_outside_area = false;
 var player_in_inside_area = false;
 
+var entry_vector: Vector2 = Vector2(0,0);
+var exit_vector: Vector2 = Vector2(0,0); 
+
 var is_player_at_door = player_in_outside_area || player_in_inside_area;
 
 func _on_body_entered(body):
@@ -43,15 +46,34 @@ func _on_inside_area_2d_body_exited(body):
 func _on_outside_area_2d_body_entered(body):
 	if(body.is_in_group("Player")):
 		player_in_outside_area = true
-		print("outside area entered at: ",body.global_position, " // in_outside_area: ",player_in_outside_area);
-		
+		entry_vector = body.global_position
 		
 func _on_outside_area_2d_body_exited(body):
 	if(body.is_in_group("Player")):
 		player_in_outside_area = false
+		exit_vector = body.global_position
 		close_door_if_open()
+		# compare entry and exit vectors
+			# if exit < entry 
+				# player has moved into the room
+			# if exit == entry 
+			#    do nothing
+			# if exit > entry
+				# player has moved into the room 
+		transition_if_entered_new_scene(body)
+		
 		
 		#print("outside area exited at: ",body.global_position, " // in_outside_area: ",player_in_outside_area);
+
+func transition_if_entered_new_scene(body):
+	var rounded_exit_y = int(round(exit_vector.y))
+	var rounded_entry_y = int(round(entry_vector.y))
+	print("rounded_exit_y: ",rounded_exit_y)
+	print("rounded_entry_y: ",rounded_entry_y)
+	var difference = rounded_exit_y - rounded_exit_y
+	print(" exit - entry doifference ", difference)
+	
+	const is_entered_new_scene = false;
 
 func close_door_if_open():
 	if(is_door_open):

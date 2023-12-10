@@ -145,7 +145,7 @@ graph_offset = Vector2(0, -17.1639)
 size = Vector2(16, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kwyvn"]
-size = Vector2(16, 19)
+size = Vector2(16, 12.5)
 
 [node name="Door" type="StaticBody2D"]
 script = ExtResource("1_8f2o5")
@@ -176,15 +176,16 @@ metadata/_edit_lock_ = true
 [node name="InsideArea2D" type="Area2D" parent="."]
 
 [node name="InsideCollisionShape" type="CollisionShape2D" parent="InsideArea2D"]
-position = Vector2(0, 4.5)
+position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_puaeu")
 
 [node name="OutsideArea2D" type="Area2D" parent="."]
 position = Vector2(0, 13)
 
 [node name="OutsideCollisionShape" type="CollisionShape2D" parent="OutsideArea2D"]
-position = Vector2(0, -11.5)
+position = Vector2(0, -8.75)
 shape = SubResource("RectangleShape2D_kwyvn")
+one_way_collision = true
 
 [connection signal="body_entered" from="InsideArea2D" to="." method="_on_inside_area_2d_body_entered"]
 [connection signal="body_exited" from="InsideArea2D" to="." method="_on_inside_area_2d_body_exited"]
