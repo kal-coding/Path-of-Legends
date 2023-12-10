@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://caymaklp2vq2m"]
+
+[ext_resource type="Script" path="res://Objects/Door.gd" id="1_8f2o5"]
+[ext_resource type="Texture2D" uid="uid://v1nkn11s5hgc" path="res://Art/Sproutlands/Tilesets/Wooden House.png" id="1_gcpi2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8f0x"]
+size = Vector2(16, 19)
+
+[node name="Door" type="Area2D"]
+script = ExtResource("1_8f2o5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_j8f0x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gcpi2")
+hframes = 7
+vframes = 5
+frame = 3
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]

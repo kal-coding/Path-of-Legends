@@ -1,0 +1,164 @@
+[gd_scene load_steps=20 format=3 uid="uid://caymaklp2vq2m"]
+
+[ext_resource type="Script" path="res://Objects/Door.gd" id="1_8f2o5"]
+[ext_resource type="Texture2D" uid="uid://v1nkn11s5hgc" path="res://Art/Sproutlands/Tilesets/Wooden House.png" id="1_gcpi2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8f0x"]
+size = Vector2(16, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_puaeu"]
+size = Vector2(16, 9.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kwyvn"]
+size = Vector2(16, 10)
+
+[sub_resource type="Animation" id="Animation_ktp2w"]
+resource_name = "close"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [17, 24, 10]
+}
+
+[sub_resource type="Animation" id="Animation_v8mek"]
+resource_name = "open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [10, 24, 17]
+}
+
+[sub_resource type="Animation" id="Animation_b71ml"]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="Animation" id="Animation_y1m5i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1n12w"]
+_data = {
+"RESET": SubResource("Animation_y1m5i"),
+"close": SubResource("Animation_ktp2w"),
+"default": SubResource("Animation_b71ml"),
+"open": SubResource("Animation_v8mek")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vft14"]
+animation = &"close"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y0wpe"]
+animation = &"default"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_do2pk"]
+animation = &"open"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uf2av"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_opsos"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ug5k4"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5iiby"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_h4ufs"]
+states/close/node = SubResource("AnimationNodeAnimation_vft14")
+states/close/position = Vector2(465, 149)
+states/default/node = SubResource("AnimationNodeAnimation_y0wpe")
+states/default/position = Vector2(353, 100)
+states/open/node = SubResource("AnimationNodeAnimation_do2pk")
+states/open/position = Vector2(465, 38)
+transitions = ["Start", "default", SubResource("AnimationNodeStateMachineTransition_uf2av"), "default", "open", SubResource("AnimationNodeStateMachineTransition_opsos"), "open", "close", SubResource("AnimationNodeStateMachineTransition_ug5k4"), "close", "default", SubResource("AnimationNodeStateMachineTransition_5iiby")]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hkym6"]
+size = Vector2(16, 16)
+
+[node name="Door" type="Area2D"]
+script = ExtResource("1_8f2o5")
+
+[node name="DoorInteractCollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_j8f0x")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gcpi2")
+hframes = 7
+vframes = 5
+frame = 10
+
+[node name="InsideArea2D" type="Area2D" parent="."]
+
+[node name="InsideCollisionShape" type="CollisionShape2D" parent="InsideArea2D"]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_puaeu")
+
+[node name="OutsideArea2D" type="Area2D" parent="."]
+position = Vector2(0, 13)
+
+[node name="OutsideCollisionShape" type="CollisionShape2D" parent="OutsideArea2D"]
+shape = SubResource("RectangleShape2D_kwyvn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1n12w")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1n12w")
+}
+tree_root = SubResource("AnimationNodeStateMachine_h4ufs")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_hkym6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="InsideArea2D" to="." method="_on_inside_area_2d_body_entered"]
+[connection signal="body_entered" from="OutsideArea2D" to="." method="_on_outside_area_2d_body_entered"]
