@@ -73,5 +73,4 @@ func close_door_if_open():
 func _on_animation_tree_animation_finished(_anim_name):
 	if(enter_new_scene): 
 		enter_new_scene = !enter_new_scene
-		var next_is_transition_area_below = !is_transition_area_below
 		Transition.transition_scene(next_scene_name, next_door_name)
