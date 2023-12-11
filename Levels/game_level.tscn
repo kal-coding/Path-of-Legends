@@ -15,6 +15,7 @@ position = Vector2(126, 121)
 door_name = "door_to_home"
 next_scene_name = "to_home"
 next_door_name = "door_to_world"
+is_transition_area_below = false
 
 [node name="Player_Cat" parent="." instance=ExtResource("1_5lgaf")]
 position = Vector2(98, 150)

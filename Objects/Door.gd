@@ -12,13 +12,13 @@ extends StaticBody2D
 
 var is_door_open = false;
 var enter_new_scene:bool = false;
-var player_in_outside_area = false;
-var player_in_inside_area = false;
+var player_in_transition_area = false;
+var player_in_interact_area = false;
 
 var entry_vector: Vector2 = Vector2(0,0);
 var exit_vector: Vector2 = Vector2(0,0); 
 
-var is_player_at_door = player_in_outside_area || player_in_inside_area;
+var is_player_at_door = player_in_transition_area || player_in_interact_area;
 
 
 func _on_body_entered(body):
@@ -30,8 +30,7 @@ func _on_body_exited(body):
 		pass
 			
 func _input(event: InputEvent):
-	if(event.is_action_pressed("interact")):
-		print("is_player_at_door: ",is_player_at_door)
+	if(event.is_action_pressed("interact") && player_in_interact_area):
 		if(is_door_open):
 			state_machine.travel('close')
 		else:
@@ -40,21 +39,21 @@ func _input(event: InputEvent):
 				
 func _on_inside_area_2d_body_entered(body):
 	if(body.is_in_group("Player")):
-		player_in_inside_area = true
+		player_in_interact_area = true
 		
 func _on_inside_area_2d_body_exited(body):
 	if(body.is_in_group("Player")):
-		player_in_inside_area = false
+		player_in_interact_area = false
 		close_door_if_open()
 
 func _on_outside_area_2d_body_entered(body):
 	if(body.is_in_group("Player")):
-		player_in_outside_area = true
+		player_in_transition_area = true
 		entry_vector = body.global_position
 		
 func _on_outside_area_2d_body_exited(body):
 	if(body.is_in_group("Player")):
-		player_in_outside_area = false
+		player_in_transition_area = false
 		exit_vector = body.global_position
 		close_door_if_open()
 		transition_if_entered_new_scene(body)
