@@ -1,19 +1,8 @@
 extends Node
 
-var player_global_coords_at_last_door: Vector2 = Vector2(0,0);
-var player_global_coords_at_recent_door: Vector2 = Vector2(0,0);
+@onready var spawned_door = 'door_to_home'
 
-func set_player_global_coords_at_door(coordinates:Vector2):
-	player_global_coords_at_door = coordinates
-	
-func get_player_global_coords_at_door():
-	return player_global_coords_at_door;
-
-func update_player_coords_on_transition_to_new_scene():
-	
-	
-
-#  A0  DA A1    B1 DB B2    C1 DC C2 
+#  $Ex1 RA En2  ||   Ex3 RB $En5  ||  Ex5 RC En6 
 
 # Player needs to know the scene he entered FROM and entered TO 
 # Player needs to know DIRECTION he entered

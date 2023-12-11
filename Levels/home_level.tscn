@@ -17,6 +17,13 @@ layer_2/name = "Foreground"
 layer_2/tile_data = PackedInt32Array(917516, 196613, 0, 917513, 5, 3, 655369, 5, 2, 720905, 5, 2, 786441, 5, 2, 851977, 5, 2, 917514, 65541, 3, 917515, 65541, 3, 917517, 65541, 3, 917518, 65541, 3, 917519, 65541, 3, 917520, 65541, 3, 917521, 65541, 3, 655378, 131077, 2, 589834, 65541, 1, 589835, 65541, 1, 589836, 65541, 1, 589837, 65541, 1, 589838, 65541, 1, 589839, 65541, 1, 589840, 65541, 1, 589841, 65541, 1, 589833, 5, 1, 589842, 131077, 1, 917522, 131077, 3, 720914, 131077, 2, 786450, 131077, 2, 851986, 131077, 2, 655370, 5, 4)
 metadata/_edit_lock_ = true
 
+[node name="door_to_world" parent="." instance=ExtResource("3_x602n")]
+position = Vector2(200, 232)
+door_name = "door_to_world"
+next_scene_name = "to_world"
+next_door_name = "door_to_home"
+is_transition_area_below = true
+
 [node name="Player_Cat" parent="." instance=ExtResource("2_igv2o")]
 position = Vector2(199, 211)
 
@@ -26,7 +33,3 @@ remote_path = NodePath("../../Camera2D")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(199, 211)
 scale = Vector2(0.713464, 0.713464)
-
-[node name="Door" parent="." instance=ExtResource("3_x602n")]
-position = Vector2(200, 232)
-door_name = "to_world"

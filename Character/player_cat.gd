@@ -7,11 +7,14 @@ extends CharacterBody2D
 # parameters/Idle/blend_position
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get('parameters/playback')
+@onready var spawn_position;
+
 
 func _ready():
+	# always face Player on spawn
 	update_animation_parameters(starting_direction)
-
-
+	spawn_into_room()
+	
 
 func _physics_process(_delta):
 	# Anything that moves and runs a certain times per second runs inside _physics_process
@@ -42,5 +45,15 @@ func pick_new_character_state():
 	else: 
 		state_machine.travel('Idle')
 
-func update_last_scene_coords(coordinates: Vector2):
-	self.set_position(coordinates)
+func spawn_into_room():
+	var player_spawned_door = PlayerVariables.spawned_door
+	var spawned_door_instance = self.get_parent().find_child(player_spawned_door)
+	var spawned_door_position = spawned_door_instance.get_position()
+	var spawned_door_is_transition_area_below = spawned_door_instance.is_transition_area_below
+	var spawned_door_player_position;
+	spawned_door_player_position = Vector2(spawned_door_position.x,int(spawned_door_position.y+10))
+	if(!spawned_door_is_transition_area_below):
+		spawned_door_player_position = Vector2(spawned_door_position.x,spawned_door_position.y+10)
+	else:
+		spawned_door_player_position = Vector2(spawned_door_position.x,spawned_door_position.y-10)
+	self.set_position(spawned_door_player_position)

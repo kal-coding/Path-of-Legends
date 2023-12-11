@@ -20,11 +20,12 @@ config/icon="res://icon.svg"
 Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 Global="*res://Utils/Global.gd"
 Transition="*res://Utils/Transition.tscn"
+PlayerVariables="*res://Utils/PlayerVariables.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=960
+window/size/viewport_height=540
 window/stretch/mode="canvas_items"
 window/stretch/scale=4.0
 

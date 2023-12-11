@@ -1,14 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://coqe6fu0el10j"]
+[gd_scene load_steps=2 format=3 uid="uid://coqe6fu0el10j"]
 
 [ext_resource type="Script" path="res://Levels/main.gd" id="1_xe0m3"]
-[ext_resource type="PackedScene" uid="uid://clqwbta0lhb5w" path="res://Utils/Transition.tscn" id="2_omd4s"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_xe0m3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 550)
-
-[node name="Transition" parent="." instance=ExtResource("2_omd4s")]
-
-[connection signal="animation_finished" from="Transition" to="." method="_on_transition_animation_finished"]

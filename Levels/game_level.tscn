@@ -10,6 +10,12 @@
 position = Vector2(98, 150)
 scale = Vector2(1.93101, -1.05749)
 
+[node name="door_to_home" parent="." instance=ExtResource("3_ndiv3")]
+position = Vector2(126, 121)
+door_name = "door_to_home"
+next_scene_name = "to_home"
+next_door_name = "door_to_world"
+
 [node name="Player_Cat" parent="." instance=ExtResource("1_5lgaf")]
 position = Vector2(98, 150)
 
@@ -35,7 +41,3 @@ layer_3/name = "Foreground"
 layer_3/z_index = 2
 layer_3/tile_data = PackedInt32Array(393221, 262149, 3, 327685, 262149, 2, 327686, 327685, 2, 327687, 327685, 2, 327688, 327685, 2, 327689, 393221, 2, 262149, 262149, 0, 262150, 327685, 0, 262151, 327685, 0, 262152, 327685, 0, 262153, 393221, 0, 458757, 262149, 4, 458758, 327685, 4, 458759, 327685, 4, 458760, 327685, 4, 393225, 393221, 3, 458761, 393221, 4, 393222, 327685, 3, 393223, 327685, 3, 393224, 327685, 3)
 metadata/_edit_lock_ = true
-
-[node name="Door" parent="." instance=ExtResource("3_ndiv3")]
-position = Vector2(130, 175)
-door_name = "to_home"

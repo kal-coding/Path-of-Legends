@@ -113,42 +113,49 @@ _data = {
 "open": SubResource("Animation_v8mek")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vft14"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q37c3"]
 animation = &"close"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y0wpe"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gj6p1"]
 animation = &"default"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_do2pk"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jmkd7"]
 animation = &"open"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uf2av"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vy4sa"]
+resource_local_to_scene = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jmjpm"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uksc1"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_opsos"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w3kim"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ug5k4"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5iiby"]
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_h4ufs"]
-states/close/node = SubResource("AnimationNodeAnimation_vft14")
-states/close/position = Vector2(465, 159)
-states/default/node = SubResource("AnimationNodeAnimation_y0wpe")
-states/default/position = Vector2(353, 100)
-states/open/node = SubResource("AnimationNodeAnimation_do2pk")
-states/open/position = Vector2(465, 36)
-transitions = ["Start", "default", SubResource("AnimationNodeStateMachineTransition_uf2av"), "default", "open", SubResource("AnimationNodeStateMachineTransition_opsos"), "open", "close", SubResource("AnimationNodeStateMachineTransition_ug5k4"), "close", "default", SubResource("AnimationNodeStateMachineTransition_5iiby")]
-graph_offset = Vector2(0, -17.1639)
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_avkio"]
+allow_transition_to_self = true
+states/End/position = Vector2(328, 160)
+states/Start/position = Vector2(143, 100)
+states/close/node = SubResource("AnimationNodeAnimation_q37c3")
+states/close/position = Vector2(346, 100)
+states/default/node = SubResource("AnimationNodeAnimation_gj6p1")
+states/default/position = Vector2(252, 100)
+states/open/node = SubResource("AnimationNodeAnimation_jmkd7")
+states/open/position = Vector2(526, 100)
+transitions = ["close", "open", SubResource("AnimationNodeStateMachineTransition_vy4sa"), "open", "close", SubResource("AnimationNodeStateMachineTransition_jmjpm"), "Start", "default", SubResource("AnimationNodeStateMachineTransition_uksc1"), "default", "close", SubResource("AnimationNodeStateMachineTransition_w3kim")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_puaeu"]
-size = Vector2(16, 13)
+size = Vector2(16, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kwyvn"]
-size = Vector2(16, 12.5)
+size = Vector2(16, 4)
 
 [node name="Door" type="StaticBody2D"]
 script = ExtResource("1_8f2o5")
+door_name = null
+next_scene_name = null
+next_door_name = null
+is_transition_area_below = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -160,10 +167,11 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+editor_description = "```````"
 libraries = {
 "": SubResource("AnimationLibrary_1n12w")
 }
-tree_root = SubResource("AnimationNodeStateMachine_h4ufs")
+tree_root = SubResource("AnimationNodeStateMachine_avkio")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -176,17 +184,17 @@ metadata/_edit_lock_ = true
 [node name="InsideArea2D" type="Area2D" parent="."]
 
 [node name="InsideCollisionShape" type="CollisionShape2D" parent="InsideArea2D"]
-position = Vector2(0, 1.5)
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_puaeu")
 
 [node name="OutsideArea2D" type="Area2D" parent="."]
 position = Vector2(0, 13)
 
 [node name="OutsideCollisionShape" type="CollisionShape2D" parent="OutsideArea2D"]
-position = Vector2(0, -8.75)
+position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_kwyvn")
-one_way_collision = true
 
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="body_entered" from="InsideArea2D" to="." method="_on_inside_area_2d_body_entered"]
 [connection signal="body_exited" from="InsideArea2D" to="." method="_on_inside_area_2d_body_exited"]
 [connection signal="body_entered" from="OutsideArea2D" to="." method="_on_outside_area_2d_body_entered"]

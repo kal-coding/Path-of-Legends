@@ -1,14 +1,17 @@
 extends StaticBody2D
 
-
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get('parameters/playback')
-@onready var InsideDoorBlock = $InsideDoorBlock
 
-@export var is_door_open = false;
+
 @export var door_name: String;
+@export var next_scene_name: String;
+@export var next_door_name: String;
+@export var is_transition_area_below: bool;
 @onready var player_global_coords_at_door:Vector2;
 
+var is_door_open = false;
+var enter_new_scene:bool = false;
 var player_in_outside_area = false;
 var player_in_inside_area = false;
 
@@ -16,6 +19,7 @@ var entry_vector: Vector2 = Vector2(0,0);
 var exit_vector: Vector2 = Vector2(0,0); 
 
 var is_player_at_door = player_in_outside_area || player_in_inside_area;
+
 
 func _on_body_entered(body):
 	if(body.is_in_group("Player")):
@@ -53,49 +57,22 @@ func _on_outside_area_2d_body_exited(body):
 		player_in_outside_area = false
 		exit_vector = body.global_position
 		close_door_if_open()
-		# compare entry and exit vectors
-			# if exit < entry 
-				# player has moved into the room
-			# if exit == entry 
-			#    do nothing
-			# if exit > entry
-				# player has moved into the room 
 		transition_if_entered_new_scene(body)
 		
-		
-		#print("outside area exited at: ",body.global_position, " // in_outside_area: ",player_in_outside_area);
-
-func transition_if_entered_new_scene(body):
-	var rounded_exit_y = int(round(exit_vector.y))
-	var rounded_entry_y = int(round(entry_vector.y))
-	print("rounded_exit_y: ",rounded_exit_y)
-	print("rounded_entry_y: ",rounded_entry_y)
-	var difference = rounded_exit_y - rounded_exit_y
-	print(" exit - entry doifference ", difference)
-	
-	const is_entered_new_scene = false;
+func transition_if_entered_new_scene(_body):
+	var calculated_transition_position= exit_vector > entry_vector
+	var player_moved_to_transition_area = calculated_transition_position == is_transition_area_below
+	print('player_moved_to_transition_area ',player_moved_to_transition_area)
+	if(player_moved_to_transition_area):
+		enter_new_scene = true
 
 func close_door_if_open():
 	if(is_door_open):
 		state_machine.travel('close')
 		is_door_open = !is_door_open;
-#func _on_animation_player_animation_finished(anim_name):
-	#match anim_name:
-		#"close":
-			#if(player_has_passed_through_door):
-				#Transition.transition_scene(door_name);
 		
-# When the player walks up to the door *in any direction, the door knows the player is there
-# Door is already closed behaviour : 
-	# player cannot pass through
-# door is open behaviour : 
-	# Player can pass through
-	# close when player passes through 
-
-
-				
-
-
-
-
-
+func _on_animation_tree_animation_finished(_anim_name):
+	if(enter_new_scene): 
+		enter_new_scene = !enter_new_scene
+		var next_is_transition_area_below = !is_transition_area_below
+		Transition.transition_scene(next_scene_name, next_door_name)
