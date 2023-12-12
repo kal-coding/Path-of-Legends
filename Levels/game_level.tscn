@@ -9,13 +9,16 @@
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(98, 150)
 scale = Vector2(1.93101, -1.05749)
+limit_left = -16
+limit_top = -16
+limit_right = 600
+limit_bottom = 600
 
 [node name="door_to_home" parent="." instance=ExtResource("3_ndiv3")]
-position = Vector2(126, 121)
+position = Vector2(120, 120)
 door_name = "door_to_home"
 next_scene_name = "to_home"
 next_door_name = "door_to_world"
-is_transition_area_below = false
 
 [node name="Player_Cat" parent="." instance=ExtResource("1_5lgaf")]
 position = Vector2(98, 150)
@@ -26,7 +29,6 @@ scale = Vector2(2.70653, -1.48219)
 remote_path = NodePath("../../Camera2D")
 
 [node name="TileMap" type="TileMap" parent="."]
-position = Vector2(6, 1)
 tile_set = ExtResource("2_nhwlk")
 format = 2
 layer_0/name = "BaseGround"
@@ -41,4 +43,3 @@ layer_2/tile_data = PackedInt32Array(-262144, 2, 0, -196608, 2, 0, -131072, 2, 0
 layer_3/name = "Foreground"
 layer_3/z_index = 2
 layer_3/tile_data = PackedInt32Array(393221, 262149, 3, 327685, 262149, 2, 327686, 327685, 2, 327687, 327685, 2, 327688, 327685, 2, 327689, 393221, 2, 262149, 262149, 0, 262150, 327685, 0, 262151, 327685, 0, 262152, 327685, 0, 262153, 393221, 0, 458757, 262149, 4, 458758, 327685, 4, 458759, 327685, 4, 458760, 327685, 4, 393225, 393221, 3, 458761, 393221, 4, 393222, 327685, 3, 393223, 327685, 3, 393224, 327685, 3)
-metadata/_edit_lock_ = true

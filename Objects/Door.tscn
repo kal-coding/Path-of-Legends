@@ -156,7 +156,6 @@ script = ExtResource("1_8f2o5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.25)
 shape = SubResource("RectangleShape2D_uri6h")
-disabled = true
 metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -184,11 +183,9 @@ metadata/_edit_lock_ = true
 [node name="DoorInteractCollisionShape" type="CollisionShape2D" parent="DoorInteractArea2D"]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_puaeu")
-metadata/_edit_lock_ = true
 
 [node name="OutsideArea2D" type="Area2D" parent="."]
 position = Vector2(0, 13)
-metadata/_edit_lock_ = true
 
 [node name="OutsideCollisionShape" type="CollisionShape2D" parent="OutsideArea2D"]
 position = Vector2(0, -7)
