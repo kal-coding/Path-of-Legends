@@ -134,7 +134,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_avkio"]
 allow_transition_to_self = true
-states/End/position = Vector2(328, 160)
+states/End/position = Vector2(637, 101.75)
 states/Start/position = Vector2(143, 100)
 states/close/node = SubResource("AnimationNodeAnimation_q37c3")
 states/close/position = Vector2(346, 100)
