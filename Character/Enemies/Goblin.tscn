@@ -809,7 +809,7 @@ shape = SubResource("RectangleShape2D_xh5mf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(2.08165e-12, 2.08165e-12)
 sprite_frames = SubResource("SpriteFrames_w17dw")
-animation = &"attack"
+animation = &"death"
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
