@@ -1,8 +1,9 @@
-[gd_scene load_steps=42 format=3 uid="uid://fb116uj7tos1"]
+[gd_scene load_steps=53 format=3 uid="uid://fb116uj7tos1"]
 
 [ext_resource type="Texture2D" uid="uid://c3wyi73nhc4k5" path="res://Art/Sproutlands/Characters/Basic Charakter Spritesheet.png" id="1_4dy2v"]
 [ext_resource type="Script" path="res://Character/player_cat.gd" id="1_psgtl"]
 [ext_resource type="Texture2D" uid="uid://hbgbqbv64h4h" path="res://Art/Sproutlands/Characters/Tools.png" id="3_viitj"]
+[ext_resource type="Script" path="res://Character/Axe.gd" id="4_max8r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5x0aj"]
 size = Vector2(11, 16)
@@ -423,7 +424,6 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_ymqq5"]
 resource_name = "attack_left"
 length = 0.45
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -476,7 +476,6 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_d1ugs"]
 resource_name = "attack_right"
 length = 0.45
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -535,6 +534,48 @@ _data = {
 "idle_right": SubResource("Animation_gl3q4")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_egi22"]
+animation = &"attack_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4ng68"]
+animation = &"attack_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_ho1j6"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_egi22")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_4ng68")
+blend_point_1/pos = Vector2(1, 0)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ld0gs"]
+animation = &"idle_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q1gvo"]
+animation = &"idle_right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_b75n1"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ld0gs")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_q1gvo")
+blend_point_1/pos = Vector2(1, 0)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_76c76"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_efflo"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_std3n"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_212hf"]
+states/attack/node = SubResource("AnimationNodeBlendSpace2D_ho1j6")
+states/attack/position = Vector2(518, 100)
+states/idle/node = SubResource("AnimationNodeBlendSpace2D_b75n1")
+states/idle/position = Vector2(357, 100)
+transitions = ["attack", "idle", SubResource("AnimationNodeStateMachineTransition_76c76"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_efflo"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_std3n")]
+
 [node name="Player_Cat" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(0.713464, 0.713464)
 collision_layer = 3
@@ -569,8 +610,20 @@ parameters/Walk/blend_position = Vector2(0.0528001, 0.32467)
 position = Vector2(-11.2129, 0)
 sprite_frames = SubResource("SpriteFrames_vw03g")
 animation = &"idle"
+script = ExtResource("4_max8r")
 
 [node name="AxeAnimationPlayer" type="AnimationPlayer" parent="Axe"]
 libraries = {
 "": SubResource("AnimationLibrary_nvoih")
 }
+
+[node name="AxeAnimationTree" type="AnimationTree" parent="Axe"]
+libraries = {
+"": SubResource("AnimationLibrary_nvoih")
+}
+tree_root = SubResource("AnimationNodeStateMachine_212hf")
+anim_player = NodePath("../AxeAnimationPlayer")
+parameters/attack/blend_position = Vector2(0, 0)
+parameters/idle/blend_position = Vector2(-0.0436975, -0.0476191)
+
+[connection signal="animation_finished" from="Axe/AxeAnimationPlayer" to="Axe" method="_on_axe_animation_player_animation_finished"]
