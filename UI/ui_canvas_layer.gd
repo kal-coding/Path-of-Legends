@@ -5,9 +5,3 @@ extends CanvasLayer
 
 func updateHealthBar(value):
 	HealthBar.value += value
-	
-func gainHealth(value): 
-	HealthBar.value += value
-	
-func loseHealth(value):
-	HealthBar.value -= value

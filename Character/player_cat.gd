@@ -47,7 +47,7 @@ func pick_new_character_state():
 
 #region OnLoad : Player spawn location in Room
 func spawn_into_room():
-	var player_spawned_door = PlayerVariables.spawned_door
+	var player_spawned_door = Player.spawned_door
 	var spawned_door_instance = self.get_parent().find_child(player_spawned_door)
 	var spawned_door_position = spawned_door_instance.get_position()
 	var spawned_door_is_transition_area_below = spawned_door_instance.is_transition_area_below

@@ -6,7 +6,7 @@ const HOME_LEVEL_PATH = "res://Levels/home_level.tscn"
 var next_scene = null;
 func transition_scene(next_scene_name, next_door_name):
 	next_scene = fetch_path_to_scene(next_scene_name)
-	PlayerVariables.spawned_door = next_door_name
+	Player.spawned_door = next_door_name
 	self.play("fade_in")
 
 func _on_animation_finished(animation_name):

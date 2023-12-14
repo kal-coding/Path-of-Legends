@@ -20,7 +20,7 @@ config/icon="res://icon.svg"
 Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 Global="*res://Utils/Global.gd"
 Transition="*res://Utils/Transition.tscn"
-PlayerVariables="*res://Utils/PlayerVariables.gd"
+Player="*res://Utils/PlayerVariables.gd"
 PlayerUI="*res://UI/ui_canvas_layer.gd"
 PlayerUICanvas="*res://UI/ui_canvas_layer.tscn"
 
