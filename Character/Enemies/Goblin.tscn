@@ -797,7 +797,7 @@ graph_offset = Vector2(-135.6, -54.2849)
 [sub_resource type="CircleShape2D" id="CircleShape2D_dxgeq"]
 radius = 131.061
 
-[node name="Goblin" type="CharacterBody2D"]
+[node name="Goblin" type="CharacterBody2D" groups=["Enemy"]]
 light_mask = 2
 visibility_layer = 2
 position = Vector2(2.08165e-12, 2.08165e-12)
@@ -805,7 +805,7 @@ slide_on_ceiling = false
 script = ExtResource("1_ssakk")
 resource = ExtResource("2_i13cq")
 
-[node name="HitboxShape" type="CollisionShape2D" parent="."]
+[node name="HitboxShape" type="CollisionShape2D" parent="." groups=["Enemy"]]
 shape = SubResource("RectangleShape2D_xh5mf")
 
 [node name="GoblinSprites" type="AnimatedSprite2D" parent="."]
@@ -840,5 +840,3 @@ shape = SubResource("CircleShape2D_dxgeq")
 
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
 [connection signal="body_exited" from="DetectionRange" to="." method="_on_detection_range_body_exited"]
-[connection signal="body_shape_entered" from="DetectionRange" to="." method="_on_detection_range_body_shape_entered"]
-[connection signal="body_shape_exited" from="DetectionRange" to="." method="_on_detection_range_body_shape_exited"]

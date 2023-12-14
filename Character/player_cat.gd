@@ -6,10 +6,7 @@ extends CharacterBody2D
 
 # parameters/Idle/blend_position
 @onready var cat_animation_tree = $AnimationTree
-@onready var axe_animation_tree = $Axe/AxeAnimationTree
-
 @onready var cat_state_machine = cat_animation_tree.get('parameters/playback')
-@onready var axe_state_machine = axe_animation_tree.get('parameters/playback')
 @onready var spawn_position;
 
 
@@ -31,18 +28,14 @@ func _physics_process(_delta):
 	# Update Velocity ( direction * speed ) 
 	velocity = input_direction * move_speed
 	
-	
 	# Move and Slide function uses velocity to make the character slide 
 	move_and_slide()
 	pick_new_character_state()
-	pick_new_axe_state()
 
 func update_animation_parameters(move_input : Vector2):
 	if(move_input != Vector2.ZERO):
 		cat_animation_tree.set('parameters/Walk/blend_position', move_input)
 		cat_animation_tree.set('parameters/Idle/blend_position', move_input)
-		axe_animation_tree.set('parameters/idle/blend_position', move_input)
-		axe_animation_tree.set('parameters/attack/blend_position', move_input)
 
 
 func pick_new_character_state():
@@ -50,11 +43,6 @@ func pick_new_character_state():
 		cat_state_machine.travel('Walk')
 	else: 
 		cat_state_machine.travel('Idle')
-
-func pick_new_axe_state():
-	if(Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
-		print('hellowiorld')
-		axe_state_machine.travel('attack')
 
 
 #region OnLoad : Player spawn location in Room

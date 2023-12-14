@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://fb116uj7tos1"]
+[gd_scene load_steps=54 format=3 uid="uid://fb116uj7tos1"]
 
 [ext_resource type="Texture2D" uid="uid://c3wyi73nhc4k5" path="res://Art/Sproutlands/Characters/Basic Charakter Spritesheet.png" id="1_4dy2v"]
 [ext_resource type="Script" path="res://Character/player_cat.gd" id="1_psgtl"]
@@ -367,6 +367,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AxeAttackDetection/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.2129, -0.666667)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AxeAttackDetection/CollisionShape2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_lnnq0"]
 resource_name = "idle_left"
@@ -420,6 +444,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AxeAttackDetection/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1.2129, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AxeAttackDetection/CollisionShape2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_ymqq5"]
 resource_name = "attack_left"
@@ -471,6 +519,30 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 2, 1]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AxeAttackDetection/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1.2129, -0.666667)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AxeAttackDetection/CollisionShape2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_d1ugs"]
@@ -524,6 +596,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [0, 2, 1]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AxeAttackDetection/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.2129, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AxeAttackDetection/CollisionShape2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nvoih"]
 _data = {
@@ -576,6 +672,9 @@ states/idle/node = SubResource("AnimationNodeBlendSpace2D_b75n1")
 states/idle/position = Vector2(357, 100)
 transitions = ["attack", "idle", SubResource("AnimationNodeStateMachineTransition_76c76"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_efflo"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_std3n")]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7n3j2"]
+size = Vector2(9.11048, 14.8156)
+
 [node name="Player_Cat" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(0.713464, 0.713464)
 collision_layer = 3
@@ -588,7 +687,6 @@ hframes = 4
 vframes = 4
 
 [node name="HitboxShape" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_5x0aj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -626,4 +724,14 @@ anim_player = NodePath("../AxeAnimationPlayer")
 parameters/attack/blend_position = Vector2(0, 0)
 parameters/idle/blend_position = Vector2(-0.0436975, -0.0476191)
 
+[node name="AxeAttackDetection" type="Area2D" parent="Axe"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Axe/AxeAttackDetection"]
+visible = false
+position = Vector2(-1.2129, 0)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_7n3j2")
+
 [connection signal="animation_finished" from="Axe/AxeAnimationPlayer" to="Axe" method="_on_axe_animation_player_animation_finished"]
+[connection signal="area_entered" from="Axe/AxeAttackDetection" to="Axe" method="_on_axe_attack_detection_area_entered"]
+[connection signal="body_entered" from="Axe/AxeAttackDetection" to="Axe" method="_on_axe_attack_detection_body_entered"]
