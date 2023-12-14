@@ -21,10 +21,12 @@ Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 Global="*res://Utils/Global.gd"
 Transition="*res://Utils/Transition.tscn"
 PlayerVariables="*res://Utils/PlayerVariables.gd"
+PlayerUI="*res://UI/ui_canvas_layer.gd"
+PlayerUICanvas="*res://UI/ui_canvas_layer.tscn"
 
 [display]
 
-window/size/viewport_width=960
+window/size/viewport_width=990
 window/size/viewport_height=540
 window/stretch/mode="canvas_items"
 window/stretch/scale=4.0
@@ -32,6 +34,20 @@ window/stretch/scale=4.0
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://Art/": "red",
+"res://Levels/": "purple",
+"res://TileSets/": "green",
+"res://UI/": "yellow",
+"res://Utils/": "blue"
+}
+
+[gui]
+
+theme/custom="res://Resources/new_theme.tres"
 
 [input]
 

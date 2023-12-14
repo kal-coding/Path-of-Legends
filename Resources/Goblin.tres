@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Resources/EnemyResourceBase.gd" id="1_nriow"]
 
 [resource]
+resource_name = "resource"
 script = ExtResource("1_nriow")
 health = 100
-attack_power = 20
+attack_damage = 10

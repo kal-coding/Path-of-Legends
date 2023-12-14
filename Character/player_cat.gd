@@ -45,6 +45,7 @@ func pick_new_character_state():
 	else: 
 		state_machine.travel('Idle')
 
+#region OnLoad : Player spawn location in Room
 func spawn_into_room():
 	var player_spawned_door = PlayerVariables.spawned_door
 	var spawned_door_instance = self.get_parent().find_child(player_spawned_door)
@@ -57,3 +58,4 @@ func spawn_into_room():
 	else:
 		spawned_door_player_position = Vector2(spawned_door_position.x,spawned_door_position.y-10)
 	self.set_position(spawned_door_player_position)
+#endregion

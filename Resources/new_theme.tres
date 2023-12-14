@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://81veef3fgpy3"]
+
+[ext_resource type="FontFile" uid="uid://d01wv1raktiei" path="res://Resources/Kalnia-VariableFont_wdth,wght.ttf" id="1_javqa"]
+
+[resource]
+Label/fonts/font = ExtResource("1_javqa")

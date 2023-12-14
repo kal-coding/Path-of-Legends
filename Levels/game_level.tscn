@@ -1,33 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwxt6khkw3521"]
+[gd_scene load_steps=5 format=3 uid="uid://dwxt6khkw3521"]
 
 [ext_resource type="PackedScene" uid="uid://fb116uj7tos1" path="res://Character/player_cat.tscn" id="1_5lgaf"]
 [ext_resource type="TileSet" uid="uid://drl772mw7ilhh" path="res://TileSets/base_tilesets.tres" id="2_nhwlk"]
 [ext_resource type="PackedScene" uid="uid://caymaklp2vq2m" path="res://Objects/Door.tscn" id="3_ndiv3"]
+[ext_resource type="PackedScene" uid="uid://bx7d4jec4qiub" path="res://Character/Enemies/Goblin.tscn" id="4_iv62c"]
 
 [node name="Game Level" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(98, 150)
 scale = Vector2(1.93101, -1.05749)
-limit_left = -16
-limit_top = -16
+limit_left = -200
+limit_top = -200
 limit_right = 600
 limit_bottom = 600
-
-[node name="Interface" type="Control" parent="Camera2D"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -50.2327
-offset_top = -79.4334
-offset_right = 230.767
-offset_bottom = 140.567
-
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="door_to_home" parent="." instance=ExtResource("3_ndiv3")]
 position = Vector2(120, 120)
@@ -58,3 +44,7 @@ layer_2/tile_data = PackedInt32Array(-262144, 2, 0, -196608, 2, 0, -131072, 2, 0
 layer_3/name = "Foreground"
 layer_3/z_index = 2
 layer_3/tile_data = PackedInt32Array(393221, 262149, 3, 327685, 262149, 2, 327686, 327685, 2, 327687, 327685, 2, 327688, 327685, 2, 327689, 393221, 2, 262149, 262149, 0, 262150, 327685, 0, 262151, 327685, 0, 262152, 327685, 0, 262153, 393221, 0, 458757, 262149, 4, 458758, 327685, 4, 458759, 327685, 4, 458760, 327685, 4, 393225, 393221, 3, 458761, 393221, 4, 393222, 327685, 3, 393223, 327685, 3, 393224, 327685, 3)
+
+[node name="Goblin" parent="." instance=ExtResource("4_iv62c")]
+position = Vector2(209, 181)
+scale = Vector2(0.4, 0.4)

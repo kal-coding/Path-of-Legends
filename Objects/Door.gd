@@ -31,6 +31,7 @@ func _on_body_exited(body):
 			
 func _input(event: InputEvent):
 	if(event.is_action_pressed("interact") && player_in_interact_area):
+		PlayerUI.updateHealthBar(100)	
 		if(is_door_open):
 			state_machine.travel('close')
 		else:
@@ -61,7 +62,6 @@ func _on_outside_area_2d_body_exited(body):
 func transition_if_entered_new_scene(_body):
 	var calculated_transition_position= exit_vector > entry_vector
 	var player_moved_to_transition_area = calculated_transition_position == is_transition_area_below
-	print('player_moved_to_transition_area ',player_moved_to_transition_area)
 	if(player_moved_to_transition_area):
 		enter_new_scene = true
 

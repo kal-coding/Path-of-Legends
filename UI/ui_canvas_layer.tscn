@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddwaxhnktd45c"]
+
+[ext_resource type="Texture2D" uid="uid://b7x526kuevy7f" path="res://Art/UI Assets/Hearts/PNG/health_bar/health_bar_decoration.png" id="1_4mtbi"]
+[ext_resource type="Script" path="res://UI/ui_canvas_layer.gd" id="1_4o6f4"]
+[ext_resource type="Texture2D" uid="uid://c8bmuk3ayrisw" path="res://Art/UI Assets/Hearts/PNG/health_bar/health_bar.png" id="2_nj80c"]
+
+[node name="UI Canvas Layer" type="CanvasLayer"]
+script = ExtResource("1_4o6f4")
+
+[node name="HealthBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="HealthBar"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 6.0
+offset_right = 33.0
+offset_bottom = 13.0
+texture = ExtResource("1_4mtbi")
+expand_mode = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HealthBar"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 6.0
+offset_right = 62.0
+offset_bottom = 23.0
+scale = Vector2(0.4, 0.4)
+value = 50.0
+texture_progress = ExtResource("2_nj80c")
