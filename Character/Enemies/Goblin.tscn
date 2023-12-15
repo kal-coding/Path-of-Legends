@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://bx7d4jec4qiub"]
+[gd_scene load_steps=83 format=3 uid="uid://bx7d4jec4qiub"]
 
 [ext_resource type="Script" path="res://Character/Enemies/Goblin.gd" id="1_ssakk"]
 [ext_resource type="Resource" uid="uid://cinpug3buwfni" path="res://Resources/Goblin.tres" id="2_i13cq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://8stotqbvrprh" path="res://Art/Goblin/Death.png" id="4_uyse2"]
 [ext_resource type="Texture2D" uid="uid://i5jd62ot6dmi" path="res://Art/Goblin/Run.png" id="5_hly5n"]
 [ext_resource type="Texture2D" uid="uid://da0j3u3f88rje" path="res://Art/Goblin/Take Hit.png" id="7_yka43"]
+[ext_resource type="PackedScene" uid="uid://ba4yelfsceh3a" path="res://Particles/blood.tscn" id="8_w130h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh5mf"]
 size = Vector2(32, 33)
@@ -752,17 +753,12 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v0b8r"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rvqs6"]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xahb0"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_unfn0"]
 switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wun2y"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_14am0"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hc1qw"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hlqx8"]
 switch_mode = 2
@@ -780,18 +776,18 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7tfvh"]
 states/End/position = Vector2(814.5, 136.915)
-states/Start/position = Vector2(123, 155.875)
+states/Start/position = Vector2(30, 146.25)
 states/attack/node = SubResource("AnimationNodeBlendSpace2D_mryu5")
-states/attack/position = Vector2(226.5, 50.875)
+states/attack/position = Vector2(221.5, -16.25)
 states/death/node = SubResource("AnimationNodeBlendSpace2D_hqdku")
-states/death/position = Vector2(606.6, 36.9901)
+states/death/position = Vector2(709.6, 36.9901)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_b45i7")
-states/idle/position = Vector2(300, 155.25)
+states/idle/position = Vector2(221.5, 146.25)
 states/run/node = SubResource("AnimationNodeBlendSpace2D_ear17")
-states/run/position = Vector2(405.5, -35.25)
+states/run/position = Vector2(511.5, -16.25)
 states/take_hit/node = SubResource("AnimationNodeBlendSpace2D_yxu8w")
-states/take_hit/position = Vector2(586.5, 137.35)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_lym4q"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_cc7f5"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_7tfru"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_wbign"), "attack", "run", SubResource("AnimationNodeStateMachineTransition_onxux"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_otdy3"), "idle", "take_hit", SubResource("AnimationNodeStateMachineTransition_v0b8r"), "attack", "take_hit", SubResource("AnimationNodeStateMachineTransition_rvqs6"), "run", "take_hit", SubResource("AnimationNodeStateMachineTransition_xahb0"), "take_hit", "death", SubResource("AnimationNodeStateMachineTransition_unfn0"), "run", "death", SubResource("AnimationNodeStateMachineTransition_wun2y"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_14am0"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_hc1qw"), "death", "End", SubResource("AnimationNodeStateMachineTransition_hlqx8"), "take_hit", "run", SubResource("AnimationNodeStateMachineTransition_wu8b7"), "take_hit", "attack", SubResource("AnimationNodeStateMachineTransition_wt65c"), "take_hit", "idle", SubResource("AnimationNodeStateMachineTransition_vcn50"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_bu470")]
+states/take_hit/position = Vector2(511.5, 146.25)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_lym4q"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_cc7f5"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_7tfru"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_wbign"), "attack", "run", SubResource("AnimationNodeStateMachineTransition_onxux"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_otdy3"), "idle", "take_hit", SubResource("AnimationNodeStateMachineTransition_v0b8r"), "attack", "take_hit", SubResource("AnimationNodeStateMachineTransition_rvqs6"), "run", "take_hit", SubResource("AnimationNodeStateMachineTransition_xahb0"), "take_hit", "death", SubResource("AnimationNodeStateMachineTransition_unfn0"), "death", "End", SubResource("AnimationNodeStateMachineTransition_hlqx8"), "take_hit", "run", SubResource("AnimationNodeStateMachineTransition_wu8b7"), "take_hit", "attack", SubResource("AnimationNodeStateMachineTransition_wt65c"), "take_hit", "idle", SubResource("AnimationNodeStateMachineTransition_vcn50"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_bu470")]
 graph_offset = Vector2(-135.6, -54.2849)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dxgeq"]
@@ -811,8 +807,7 @@ shape = SubResource("RectangleShape2D_xh5mf")
 [node name="GoblinSprites" type="AnimatedSprite2D" parent="."]
 position = Vector2(2.08165e-12, -9)
 sprite_frames = SubResource("SpriteFrames_w17dw")
-animation = &"idle"
-flip_h = true
+animation = &"death"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../GoblinSprites")
@@ -828,15 +823,18 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_7tfvh")
 anim_player = NodePath("../AnimationPlayer")
 parameters/attack/blend_position = Vector2(-0.992366, -0.0288714)
-parameters/death/blend_position = Vector2(0, 0)
+parameters/death/blend_position = Vector2(-0.129412, -0.492064)
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/run/blend_position = Vector2(0.0992366, 0.154856)
 parameters/take_hit/blend_position = Vector2(0, 0)
+
+[node name="CPUParticles2D" parent="." instance=ExtResource("8_w130h")]
 
 [node name="DetectionRange" type="Area2D" parent="."]
 
 [node name="DetectionShape" type="CollisionShape2D" parent="DetectionRange"]
 shape = SubResource("CircleShape2D_dxgeq")
 
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
 [connection signal="body_exited" from="DetectionRange" to="." method="_on_detection_range_body_exited"]

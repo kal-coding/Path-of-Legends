@@ -7,6 +7,7 @@ extends AnimatedSprite2D
 
 @onready var axe_state_machine = axe_animation_tree.get('parameters/playback')
 @onready var spawn_position;
+@onready var attack_damage = 50;
 
 
 func _ready():
@@ -46,11 +47,11 @@ func _on_axe_animation_player_animation_finished(anim_name):
 
 
 func _on_axe_attack_detection_body_entered(body):
-
 	var axe_state = axe_state_machine.get_current_node()
 	var is_attack_state = axe_state == "attack"
 	if(body.is_in_group("Enemy") && is_attack_state):
-		print('reduce enemy health')
+		
+		body.loseHealth(attack_damage)
 	pass # Replace with function body.
 
 

@@ -17,7 +17,7 @@ func _on_animation_finished(animation_name):
 			Global.goto_scene(next_scene)
 			self.play("fade_out")
 		"fade_out":
-			print('faded_out')
+			pass
 
 func fetch_path_to_scene(next_scene_name):
 	var scene_path;

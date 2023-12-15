@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 
 	
-@export var move_speed : float = 30
+@export var move_speed : float = 50
 @export var starting_direction:  Vector2 = Vector2(0,1)
 @export var player_last_scene_coords:  Vector2;
 
@@ -13,8 +13,12 @@ extends CharacterBody2D
 @onready var spawn_position;
 @onready var health : int;
 @onready var attack_damage : int;
-@onready var chase_player : bool = false;
+@onready var chase_player_flag : bool = false;
 @onready var player;
+@onready var particles = $CPUParticles2D ;
+
+@export var is_alive_flag = true;
+@export var take_hit_flag = false;
 
 
 func _ready():
@@ -24,21 +28,9 @@ func _ready():
 	
 
 func _physics_process(_delta):
-	 #Anything that moves and runs a certain times per second runs inside _physics_process
-	#var input_direction = Vector2(
-		#Input.get_action_strength("right") - Input.get_action_strength("left"),
-		#Input.get_action_strength("down") - Input.get_action_strength("up")
-	#)
-	#update_animation_parameters(input_direction)
-	#
-	#
-	## Update Velocity ( direction * speed ) 
-	#velocity = input_direction * move_speed
-	
-	# Move and Slide function uses velocity to make the character slide 
-	chase()
 	pick_new_character_state()
-
+	move_and_slide()
+	
 func update_animation_parameters(move_input : Vector2):
 	if(move_input != Vector2.ZERO):
 		animation_tree.set('parameters/run/blend_position', move_input)
@@ -49,35 +41,75 @@ func update_animation_parameters(move_input : Vector2):
 
 
 func pick_new_character_state():
-	if(velocity != Vector2.ZERO):
+	if(health <= 0 && is_alive_flag):
+		state_machine.travel('death')
+		var player_position = player.position
+		var input_direction = (player_position - position).normalized()
+		velocity = -input_direction * move_speed*1.2
+		update_animation_parameters(input_direction)
+		is_alive_flag = false;
+	elif(take_hit_flag && is_alive_flag):
+		state_machine.travel('take_hit')
+		var player_position = player.position
+		var input_direction = (player_position - position).normalized()
+		velocity = -input_direction * move_speed*1.2
+		update_animation_parameters(input_direction)
+	elif(chase_player_flag && is_alive_flag):
 		state_machine.travel('run')
-	else: 
-		state_machine.travel('idle')
-
-
-
-func _on_detection_range_body_entered(body):
-	switch_chase_state(body)
-
-
-func _on_detection_range_body_exited(body):
-	switch_chase_state(body)
-
-func switch_chase_state(body):
-	if(body.is_in_group("Player")):
-		player = body
-		chase_player = !chase_player
-		if(!chase_player): 
-			velocity = Vector2.ZERO
-		print("chase_player : ",chase_player)
-
-func chase():
-	if(chase_player):
 		var player_position = player.position
 		var input_direction = (player_position - position).normalized()
 		velocity = input_direction * move_speed
 		update_animation_parameters(input_direction)
-		move_and_slide()
+	elif(!is_alive_flag):
+		pass;
+	else: 
+		state_machine.travel('idle')
+		velocity = Vector2.ZERO
+
+
+func _on_detection_range_body_entered(body):
+	switch_chase_flag(body)
+
+func _on_detection_range_body_exited(body):
+	switch_chase_flag(body)
+
+
+func switch_chase_flag(body):
+	if(body.is_in_group("Player") && checkIfAlive()):
+		player = body
+		chase_player_flag = !chase_player_flag
+		print("chase_player_flag: ",chase_player_flag)
 	
+func loseHealth(damage_taken):
+	if(checkIfAlive() && !take_hit_flag):
+		health -= damage_taken
+		take_hit_flag = true;
+		particles.set_direction(player.position)
+		particles.set_emitting(true)
+		print("enemy damage taken! enemy health: ", health)
 	
-	# Update Velocity ( direction * speed ) 
+func checkIfAlive():
+	return health > 0
+	
+func checkIfStateIsTakeHit():
+	return state_machine.get_current_node() == "take_hit"
+
+func checkIfStateIsDeath():
+	return state_machine.get_current_node() == "death"
+	
+func _on_animation_tree_animation_finished(anim_name):
+	print("anim_name",anim_name)
+	match(anim_name):
+		"take_hit_left":
+			print("take_hit_left anim finished")
+			take_hit_flag = false
+		"take_hit_right":
+			print("take_hit_right anim finished")
+			take_hit_flag = false
+		"death_right":
+			velocity = Vector2.ZERO
+		"death_left":
+			velocity = Vector2.ZERO
+
+	
+			
