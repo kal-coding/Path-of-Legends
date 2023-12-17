@@ -9,6 +9,7 @@ func gainHealth(value):
 
 func loseHealth(value):
 	Health -= value;
+	print(Health)
 	PlayerUICanvas.updateHealthBar(Health);
 #  $Ex1 RA En2  ||   Ex3 RB $En5  ||  Ex5 RC En6 
 

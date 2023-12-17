@@ -4,4 +4,4 @@ extends CanvasLayer
 @onready var HealthBar = get_node(HEALTH_BAR_PATH)
 
 func updateHealthBar(value):
-	HealthBar.value += value
+	HealthBar.value = value

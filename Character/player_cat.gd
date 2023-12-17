@@ -59,3 +59,6 @@ func spawn_into_room():
 		spawned_door_player_position = Vector2(spawned_door_position.x,spawned_door_position.y-10)
 	self.set_position(spawned_door_player_position)
 #endregion
+
+func loseHealth(damage_taken):
+	Player.loseHealth(damage_taken)

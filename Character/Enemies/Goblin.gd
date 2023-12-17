@@ -60,6 +60,10 @@ func pick_new_character_state():
 		var input_direction = (player_position - position).normalized()
 		velocity = input_direction * move_speed
 		update_animation_parameters(input_direction)
+		var distance_to_player = $".".position.distance_to(player.position)
+		if (distance_to_player < 15):
+			velocity = Vector2.ZERO
+			state_machine.travel('attack')
 	elif(!is_alive_flag):
 		pass;
 	else: 
@@ -78,7 +82,6 @@ func switch_chase_flag(body):
 	if(body.is_in_group("Player") && checkIfAlive()):
 		player = body
 		chase_player_flag = !chase_player_flag
-		print("chase_player_flag: ",chase_player_flag)
 	
 func loseHealth(damage_taken):
 	if(checkIfAlive() && !take_hit_flag):
@@ -86,7 +89,6 @@ func loseHealth(damage_taken):
 		take_hit_flag = true;
 		particles.set_direction(player.position)
 		particles.set_emitting(true)
-		print("enemy damage taken! enemy health: ", health)
 	
 func checkIfAlive():
 	return health > 0
@@ -101,15 +103,15 @@ func _on_animation_tree_animation_finished(anim_name):
 	print("anim_name",anim_name)
 	match(anim_name):
 		"take_hit_left":
-			print("take_hit_left anim finished")
 			take_hit_flag = false
 		"take_hit_right":
-			print("take_hit_right anim finished")
 			take_hit_flag = false
 		"death_right":
 			velocity = Vector2.ZERO
 		"death_left":
 			velocity = Vector2.ZERO
 
-	
-			
+
+func _on_attack_range_body_entered(body):
+	if(body.is_in_group("Player")):
+		body.loseHealth(attack_damage)
