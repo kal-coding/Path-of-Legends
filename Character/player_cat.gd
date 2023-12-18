@@ -9,6 +9,8 @@ extends CharacterBody2D
 @onready var cat_state_machine = cat_animation_tree.get('parameters/playback')
 @onready var spawn_position;
 
+@onready var isPlayerAlive = true;
+
 
 func _ready():
 	# always face Player on spawn
@@ -26,8 +28,9 @@ func _physics_process(_delta):
 	update_animation_parameters(input_direction)
 	
 	# Update Velocity ( direction * speed ) 
-	velocity = input_direction.normalized() * move_speed
-	
+	if(isPlayerAlive):
+		velocity = input_direction.normalized() * move_speed
+		
 	# Move and Slide function uses velocity to make the character slide 
 	move_and_slide()
 	pick_new_character_state()
@@ -39,9 +42,10 @@ func update_animation_parameters(move_input : Vector2):
 
 
 func pick_new_character_state():
-	if(velocity != Vector2.ZERO):
+	var isPlayerMoving = velocity != Vector2.ZERO
+	if(isPlayerMoving && isPlayerAlive):
 		cat_state_machine.travel('Walk')
-	else: 
+	elif(!isPlayerMoving && isPlayerAlive): 
 		cat_state_machine.travel('Idle')
 
 
@@ -61,4 +65,12 @@ func spawn_into_room():
 #endregion
 
 func loseHealth(damage_taken):
-	Player.loseHealth(damage_taken)
+	if(Player.Health > 0):
+		Player.loseHealth(damage_taken)
+	elif(Player.Health <= 0 && isPlayerAlive):
+		isPlayerAlive = false;
+		$Axe.queue_free()
+		cat_state_machine.travel('Death')
+		
+		
+	
