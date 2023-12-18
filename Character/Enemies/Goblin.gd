@@ -48,6 +48,7 @@ func pick_new_character_state():
 		velocity = -input_direction * move_speed*1.2
 		update_animation_parameters(input_direction)
 		is_alive_flag = false;
+		$Timer.start(1.5)
 	elif(take_hit_flag && is_alive_flag):
 		state_machine.travel('take_hit')
 		var player_position = player.position
@@ -115,3 +116,8 @@ func _on_animation_tree_animation_finished(anim_name):
 func _on_attack_range_body_entered(body):
 	if(body.is_in_group("Player")):
 		body.loseHealth(attack_damage)
+
+
+func _on_timer_timeout():
+	queue_free()
+	pass 
