@@ -10,7 +10,7 @@ extends CharacterBody2D
 @onready var spawn_position;
 
 @onready var isPlayerAlive = true;
-
+@onready var shoot_position = $ShootPosition
 
 func _ready():
 	# always face Player on spawn
@@ -72,5 +72,5 @@ func loseHealth(damage_taken):
 		$Axe.queue_free()
 		cat_state_machine.travel('Death')
 		
-		
+
 	
