@@ -9,7 +9,6 @@ var direction = Vector2.ZERO
 
 func _ready():
 	set_as_top_level(true)
-	print("position: ",position ,", direction: ",direction)
 	look_at(position * direction)
 	timer.start(lifetime)
 

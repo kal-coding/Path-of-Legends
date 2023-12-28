@@ -11,12 +11,21 @@ extends CharacterBody2D
 
 @onready var isPlayerAlive = true;
 @onready var shoot_position = $ShootPosition
+@onready var equipped_weapon = Player.equipped_weapon
+
+
+@onready var AxeScene = preload("res://Objects/Weapons/axe.tscn")
 
 func _ready():
 	# always face Player on spawn
 	update_animation_parameters(starting_direction)
 	spawn_into_room()
-	
+	ready_weapon()
+
+func ready_weapon():
+	if(equipped_weapon == "Axe"):
+		var AxeInstance = AxeScene.instantiate()
+		add_child(AxeInstance)
 
 func _physics_process(_delta):
 	# Anything that moves and runs a certain times per second runs inside _physics_process

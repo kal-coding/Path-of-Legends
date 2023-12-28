@@ -2,6 +2,8 @@ extends Node
 
 @onready var spawned_door = 'door_to_home'
 @onready var Health = 100 
+@onready var equipped_weapon = 'Axe'
+@onready var weapons = ['Axe','Bow']
 
 func gainHealth(value):
 	Health += value;
@@ -13,8 +15,12 @@ func loseHealth(value):
 	PlayerUICanvas.updateHealthBar(Health);
 #  $Ex1 RA En2  ||   Ex3 RB $En5  ||  Ex5 RC En6 
 
-# Player needs to know the scene he entered FROM and entered TO 
-# Player needs to know DIRECTION he entered
+func swap_weapon(): 
+	if(equipped_weapon == 'Axe'):
+		equipped_weapon = 'Bow'
+	else:
+		equipped_weapon = 'Axe'
+
 
 # out to in = 1
 # in to out = 0 

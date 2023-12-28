@@ -101,7 +101,6 @@ func checkIfStateIsDeath():
 	return state_machine.get_current_node() == "death"
 	
 func _on_animation_tree_animation_finished(anim_name):
-	print("anim_name",anim_name)
 	match(anim_name):
 		"take_hit_left":
 			take_hit_flag = false
