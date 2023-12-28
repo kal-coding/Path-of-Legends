@@ -1,0 +1,208 @@
+[gd_scene load_steps=14 format=3 uid="uid://ee6x2ippyguw"]
+
+[ext_resource type="Texture2D" uid="uid://crrleiqf5ls47" path="res://Art/Weapons/Bow and Arrows.png" id="1_m6rdu"]
+[ext_resource type="Script" path="res://Objects/Weapons/Bow.gd" id="2_o2lpp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycnlr"]
+atlas = ExtResource("1_m6rdu")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25htb"]
+atlas = ExtResource("1_m6rdu")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7g1pq"]
+atlas = ExtResource("1_m6rdu")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csngn"]
+atlas = ExtResource("1_m6rdu")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ojj7"]
+atlas = ExtResource("1_m6rdu")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_smjje"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycnlr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25htb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7g1pq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_csngn")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ojj7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_5iwwl"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_uarvf"]
+resource_name = "attack"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.4, 0.5, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 9.18958, 30.91),
+"update": 1,
+"values": [0, 1, 2, 3, 1, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.1, 1.3),
+"transitions": PackedFloat32Array(2.46229, 8.93607e-05, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-5, 0), Vector2(-5, -3), Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Sprite2D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 1.1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, -0.623083, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_prudm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fhq7u"]
+_data = {
+"RESET": SubResource("Animation_prudm"),
+"attack": SubResource("Animation_uarvf"),
+"idle": SubResource("Animation_5iwwl")
+}
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_lvl1r"]
+
+[node name="Bow" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_smjje")
+animation = &"attack"
+autoplay = "idle"
+offset = Vector2(10, 0)
+script = ExtResource("2_o2lpp")
+
+[node name="BowAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../BowAnimationTree")
+libraries = {
+"": SubResource("AnimationLibrary_fhq7u")
+}
+
+[node name="BowAnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath(".")
+libraries = {
+"": SubResource("AnimationLibrary_fhq7u")
+}
+tree_root = SubResource("AnimationNodeStateMachine_lvl1r")
+anim_player = NodePath("../BowAnimationPlayer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_m6rdu")
+offset = Vector2(18, 0)
+hframes = 3
+vframes = 3
+frame = 2

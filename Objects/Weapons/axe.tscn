@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://bmxiwj84kwr2v"]
 
 [ext_resource type="Texture2D" uid="uid://hbgbqbv64h4h" path="res://Art/Sproutlands/Characters/Tools.png" id="1_wrcjk"]
-[ext_resource type="Script" path="res://Objects/Weapons/Axe.gd" id="2_7v5q4"]
+[ext_resource type="Script" path="res://Objects/Weapons/Axe.gd" id="2_girg1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0jxyq"]
 atlas = ExtResource("1_wrcjk")
@@ -420,10 +420,10 @@ transitions = ["attack", "idle", SubResource("AnimationNodeStateMachineTransitio
 size = Vector2(9.11048, 14.8156)
 
 [node name="Axe" type="AnimatedSprite2D"]
-position = Vector2(-10, 0.0822564)
+position = Vector2(-11.2129, 0)
 sprite_frames = SubResource("SpriteFrames_vw03g")
 animation = &"idle"
-script = ExtResource("2_7v5q4")
+script = ExtResource("2_girg1")
 
 [node name="AxeAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
