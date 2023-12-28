@@ -15,6 +15,7 @@ extends CharacterBody2D
 @onready var attack_damage : int;
 @onready var chase_player_flag : bool = false;
 @onready var player;
+@onready var damage_source_position;
 @onready var particles = $CPUParticles2D ;
 
 @export var is_alive_flag = true;
@@ -43,16 +44,14 @@ func update_animation_parameters(move_input : Vector2):
 func pick_new_character_state():
 	if(health <= 0 && is_alive_flag):
 		state_machine.travel('death')
-		var player_position = player.position
-		var input_direction = (player_position - position).normalized()
+		var input_direction = (damage_source_position - position).normalized()
 		velocity = -input_direction * move_speed*1.2
 		update_animation_parameters(input_direction)
 		is_alive_flag = false;
 		$Timer.start(1.5)
 	elif(take_hit_flag && is_alive_flag):
 		state_machine.travel('take_hit')
-		var player_position = player.position
-		var input_direction = (player_position - position).normalized()
+		var input_direction = (damage_source_position - position).normalized()
 		velocity = -input_direction * move_speed*1.2
 		update_animation_parameters(input_direction)
 	elif(chase_player_flag && is_alive_flag):
@@ -84,11 +83,12 @@ func switch_chase_flag(body):
 		player = body
 		chase_player_flag = !chase_player_flag
 	
-func loseHealth(damage_taken):
+func loseHealth(damage_taken,damage_source_p):
 	if(checkIfAlive() && !take_hit_flag):
+		damage_source_position = damage_source_p
 		health -= damage_taken
 		take_hit_flag = true;
-		particles.set_direction(player.position)
+		particles.set_direction(damage_source_position)
 		particles.set_emitting(true)
 	
 func checkIfAlive():
@@ -114,7 +114,7 @@ func _on_animation_tree_animation_finished(anim_name):
 
 func _on_attack_range_body_entered(body):
 	if(body.is_in_group("Player")):
-		body.loseHealth(attack_damage)
+		body.loseHealth(attack_damage,player)
 
 
 func _on_timer_timeout():
