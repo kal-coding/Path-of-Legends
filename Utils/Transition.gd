@@ -10,7 +10,6 @@ func transition_scene(next_scene_name, next_door_name):
 	self.play("fade_in")
 
 func _on_animation_finished(animation_name):
-	print('animation')
 	match animation_name:
 		"fade_in":
 			# Set last world co ords

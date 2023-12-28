@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://4uqhpf3p4sbq"]
 
+[ext_resource type="Texture2D" uid="uid://crrleiqf5ls47" path="res://Art/Weapons/Bow and Arrows.png" id="1_be7yd"]
 [ext_resource type="Script" path="res://Particles/arrow.gd" id="1_kvu1g"]
-[ext_resource type="Texture2D" uid="uid://crrleiqf5ls47" path="res://Art/Weapons/Bow and Arrows.png" id="1_pjv8f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7f8kr"]
-atlas = ExtResource("1_pjv8f")
+atlas = ExtResource("1_be7yd")
 region = Rect2(32, 16, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7031i"]
@@ -19,7 +19,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8u5d"]
-size = Vector2(3.33333, 5)
+size = Vector2(3.33333, 5.83333)
 
 [node name="Arrow" type="AnimatedSprite2D"]
 scale = Vector2(0.6, 0.6)
@@ -29,6 +29,7 @@ script = ExtResource("1_kvu1g")
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(6.66667, -0.416667)
 shape = SubResource("RectangleShape2D_y8u5d")
 
 [node name="Timer" type="Timer" parent="."]

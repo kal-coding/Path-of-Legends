@@ -2,7 +2,7 @@ extends Node
 
 @onready var spawned_door = 'door_to_home'
 @onready var Health = 100 
-@onready var equipped_weapon = 'Axe'
+@onready var equipped_weapon = 'Bow'
 @onready var weapons = ['Axe','Bow']
 
 func gainHealth(value):

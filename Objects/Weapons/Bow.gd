@@ -12,7 +12,9 @@ func _process(delta):
 func shoot(projectile: PackedScene): 
 	var projectile_instance = projectile.instantiate()
 	projectile_instance.position = shoot_position.global_position
-	projectile_instance.direction = global_position.direction_to(get_global_mouse_position())
+	print('direction before',projectile_instance.direction)
+	projectile_instance.direction = shoot_position.global_position.direction_to(get_global_mouse_position())
+	print('direction after',projectile_instance.direction)
 	add_child(projectile_instance)
 	
 #

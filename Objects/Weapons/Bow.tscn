@@ -96,7 +96,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Sprite2D:visible")
+tracks/2/path = NodePath("../NockedArrow:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -108,7 +108,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Sprite2D:position")
+tracks/3/path = NodePath("../NockedArrow:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -120,7 +120,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Sprite2D:rotation")
+tracks/4/path = NodePath("../NockedArrow:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -135,7 +135,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:visible")
+tracks/0/path = NodePath("../NockedArrow:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -147,7 +147,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite2D:position")
+tracks/1/path = NodePath("../NockedArrow:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -159,7 +159,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Sprite2D:rotation")
+tracks/2/path = NodePath("../NockedArrow:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -179,8 +179,9 @@ _data = {
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_lvl1r"]
 
 [node name="Bow" type="AnimatedSprite2D"]
+scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_smjje")
-animation = &"attack"
+animation = &"idle"
 autoplay = "idle"
 offset = Vector2(10, 0)
 script = ExtResource("2_o2lpp")
@@ -199,10 +200,13 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_lvl1r")
 anim_player = NodePath("../BowAnimationPlayer")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="NockedArrow" type="Sprite2D" parent="."]
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_m6rdu")
 offset = Vector2(18, 0)
 hframes = 3
 vframes = 3
 frame = 2
+
+[node name="ShootPosition" type="Marker2D" parent="."]
+position = Vector2(10, 0)

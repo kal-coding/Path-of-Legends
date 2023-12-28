@@ -15,6 +15,8 @@ extends CharacterBody2D
 
 
 @onready var AxeScene = preload("res://Objects/Weapons/axe.tscn")
+@onready var BowScene = preload("res://Objects/Weapons/Bow.tscn")
+
 
 func _ready():
 	# always face Player on spawn
@@ -26,6 +28,9 @@ func ready_weapon():
 	if(equipped_weapon == "Axe"):
 		var AxeInstance = AxeScene.instantiate()
 		add_child(AxeInstance)
+	elif(equipped_weapon == "Bow"): 
+		var BowInstance = BowScene.instantiate()
+		add_child(BowInstance)
 
 func _physics_process(_delta):
 	# Anything that moves and runs a certain times per second runs inside _physics_process
