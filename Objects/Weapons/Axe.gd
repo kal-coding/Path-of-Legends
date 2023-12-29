@@ -30,15 +30,9 @@ func update_animation_parameters(move_input : Vector2):
 		axe_animation_tree.set('parameters/idle/blend_position', move_input)
 		axe_animation_tree.set('parameters/attack/blend_position', move_input)
 
-
 func pick_new_axe_state():
 	if(Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
 		axe_state_machine.travel('attack')
-
-
-
-func _on_axe_animation_player_animation_finished(anim_name):
-	pass
 
 
 func _on_axe_attack_detection_body_entered(body):

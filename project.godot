@@ -23,6 +23,7 @@ Transition="*res://Utils/Transition.tscn"
 Player="*res://Utils/PlayerVariables.gd"
 PlayerUI="*res://UI/ui_canvas_layer.gd"
 PlayerUICanvas="*res://UI/ui_canvas_layer.tscn"
+AudioManager="*res://Sound/AudioManager.gd"
 
 [display]
 

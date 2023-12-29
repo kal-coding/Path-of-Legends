@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cudb6ycwbi4ru"]
+[gd_scene load_steps=5 format=3 uid="uid://cudb6ycwbi4ru"]
 
 [ext_resource type="TileSet" uid="uid://drl772mw7ilhh" path="res://TileSets/base_tilesets.tres" id="1_4f178"]
 [ext_resource type="PackedScene" uid="uid://fb116uj7tos1" path="res://Character/player_cat.tscn" id="2_igv2o"]
 [ext_resource type="PackedScene" uid="uid://caymaklp2vq2m" path="res://Objects/Door.tscn" id="3_x602n"]
+[ext_resource type="AudioStream" uid="uid://ca2b5cbw22br7" path="res://Sound/bgmusic_room.mp3" id="4_dbhrm"]
 
 [node name="HomeLevel" type="Node2D"]
 
@@ -40,3 +41,8 @@ position = Vector2(132, 185)
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player_Cat"]
 position = Vector2(-824.148, 510.187)
 remote_path = NodePath("../../Camera2D")
+
+[node name="BGMusicRoom" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_dbhrm")
+volume_db = -16.98
+autoplay = true

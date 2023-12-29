@@ -88,6 +88,7 @@ func loseHealth(damage_taken,damage_source_p):
 		damage_source_position = damage_source_p
 		health -= damage_taken
 		take_hit_flag = true;
+		AudioManager.play_sound_2D($GoblinTakeHit)
 		particles.set_direction(damage_source_position)
 		particles.set_emitting(true)
 	
@@ -114,7 +115,7 @@ func _on_animation_tree_animation_finished(anim_name):
 
 func _on_attack_range_body_entered(body):
 	if(body.is_in_group("Player")):
-		body.loseHealth(attack_damage,player)
+		body.loseHealth(attack_damage)
 
 
 func _on_timer_timeout():

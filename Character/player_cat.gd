@@ -83,8 +83,8 @@ func loseHealth(damage_taken):
 		Player.loseHealth(damage_taken)
 	elif(Player.Health <= 0 && isPlayerAlive):
 		isPlayerAlive = false;
-		$Axe.queue_free()
 		cat_state_machine.travel('Death')
+		$GameOverAudio.play()
 		
 
 	

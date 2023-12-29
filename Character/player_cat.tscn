@@ -1,7 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://fb116uj7tos1"]
+[gd_scene load_steps=35 format=3 uid="uid://fb116uj7tos1"]
 
 [ext_resource type="Texture2D" uid="uid://c3wyi73nhc4k5" path="res://Art/Sproutlands/Characters/Basic Charakter Spritesheet.png" id="1_4dy2v"]
 [ext_resource type="Script" path="res://Character/player_cat.gd" id="1_psgtl"]
+[ext_resource type="AudioStream" uid="uid://drqreucjuqe14" path="res://Sound/game_over.mp3" id="3_hvclo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5x0aj"]
 size = Vector2(11, 16)
@@ -428,3 +429,9 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/BlendSpace2D/blend_position = Vector2(0.0176001, -0.248677)
 parameters/Idle/blend_position = Vector2(0, -0.238624)
 parameters/Walk/blend_position = Vector2(0.0528001, 0.32467)
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
+[node name="GameOverAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hvclo")

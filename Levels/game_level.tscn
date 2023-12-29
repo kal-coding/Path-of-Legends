@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwxt6khkw3521"]
+[gd_scene load_steps=6 format=3 uid="uid://dwxt6khkw3521"]
 
 [ext_resource type="PackedScene" uid="uid://fb116uj7tos1" path="res://Character/player_cat.tscn" id="1_5lgaf"]
 [ext_resource type="TileSet" uid="uid://drl772mw7ilhh" path="res://TileSets/base_tilesets.tres" id="2_nhwlk"]
 [ext_resource type="PackedScene" uid="uid://caymaklp2vq2m" path="res://Objects/Door.tscn" id="3_ndiv3"]
 [ext_resource type="PackedScene" uid="uid://bx7d4jec4qiub" path="res://Character/Enemies/Goblin.tscn" id="4_iv62c"]
+[ext_resource type="AudioStream" uid="uid://bywingt2ejed1" path="res://Sound/bgmusic_plains.mp3" id="5_wrl1o"]
 
 [node name="Game Level" type="Node2D"]
 
@@ -49,3 +50,8 @@ layer_3/tile_data = PackedInt32Array(393221, 262149, 3, 327685, 262149, 2, 32768
 [node name="Goblin" parent="." instance=ExtResource("4_iv62c")]
 position = Vector2(209, 181)
 scale = Vector2(0.4, 0.4)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_wrl1o")
+volume_db = -6.497
+autoplay = true
